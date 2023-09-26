@@ -30,8 +30,17 @@ const createExercise = async (req, res) => {
   if (date) {
     finalExerciseObject = { uid, description, duration, date }
   }
+  const user = await User.find({ _id: uid })
   const exercise = await Exercise.create(finalExerciseObject)
-  res.status(201).json({ user: exercise })
+  res
+    .status(201)
+    .json({
+      username: user.username,
+      description: exercise.description,
+      duration: exercise.duration,
+      date: exercise.date,
+      _id,
+    })
 }
 
 //get exercises for a user
@@ -50,7 +59,14 @@ const getExercise = async (req, res) => {
       result = result.limit(Number(limit))
     }
     const exercises = await result
-    res.status(200).json({ user: exercises, counts: exercises.length })
+    const user = await User.find({ _id: uid })
+    res
+      .status(200)
+      .json({
+        username: user.username,
+        counts: exercises.length,
+        log: exercises,
+      })
   } catch (error) {
     console.log(error)
   }
