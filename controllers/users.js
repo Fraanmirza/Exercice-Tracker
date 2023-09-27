@@ -25,7 +25,8 @@ const getUsers = async (req, res) => {
 
 //create Exercise for the user
 const createExercise = async (req, res) => {
-  const { uid, description, duration, date } = req.body
+  const uid = req.params._id
+  const { description, duration, date } = req.body
   let finalExerciseObject = { uid, description, duration }
   if (date) {
     finalExerciseObject = { uid, description, duration, date }
