@@ -39,7 +39,7 @@ const createExercise = async (req, res) => {
       description: exercise.description,
       duration: exercise.duration,
       date: exercise.date.toDateString(),
-      _id: exercise._id,
+      _id: uid,
     },
   })
 }
