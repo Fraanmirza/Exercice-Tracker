@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-var date = new Date()
+var date = new Date().toDateString()
 const ExerciseSchema = new mongoose.Schema({
   uid: {
     type: mongoose.Types.ObjectId,

@@ -36,8 +36,8 @@ const createExercise = async (req, res) => {
     username: user.username,
     description: exercise.description,
     duration: exercise.duration,
-    date: exercise.date,
-    _id,
+    date: exercise.date.toDateString(),
+    _id: exercise._id,
   })
 }
 
@@ -56,11 +56,19 @@ const getExercise = async (req, res) => {
     if (limit) {
       result = result.limit(Number(limit))
     }
-    const exercises = await result
+    let exercises = await result
     const user = await User.findOne({ _id: uid })
+    exercises = exercises.map((item) => {
+      return {
+        description: item.description,
+        duration: item.duration,
+        date: item.date.toDateString(),
+      }
+    })
     res.status(200).json({
       username: user.username,
       count: exercises.length,
+      _id: uid,
       log: exercises,
     })
   } catch (error) {
