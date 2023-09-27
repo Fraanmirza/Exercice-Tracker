@@ -34,13 +34,11 @@ const createExercise = async (req, res) => {
   const user = await User.findOne({ _id: uid })
   const exercise = await Exercise.create(finalExerciseObject)
   res.status(201).json({
-    user: {
-      username: user.username,
-      description: exercise.description,
-      duration: exercise.duration,
-      date: exercise.date.toDateString(),
-      _id: uid,
-    },
+    username: user.username,
+    description: exercise.description,
+    duration: exercise.duration,
+    date: exercise.date.toDateString(),
+    _id: uid,
   })
 }
 
