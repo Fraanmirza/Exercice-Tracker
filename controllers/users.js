@@ -17,7 +17,7 @@ const createUser = async (req, res) => {
 const getUsers = async (req, res) => {
   try {
     const users = await User.find({})
-    res.status(200).json({ users })
+    res.status(200).json(users)
   } catch (error) {
     console.log(error)
   }
@@ -60,7 +60,7 @@ const getExercise = async (req, res) => {
     const user = await User.findOne({ _id: uid })
     res.status(200).json({
       username: user.username,
-      counts: exercises.length,
+      count: exercises.length,
       log: exercises,
     })
   } catch (error) {
